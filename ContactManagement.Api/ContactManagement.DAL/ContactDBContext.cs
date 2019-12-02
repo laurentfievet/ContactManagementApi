@@ -15,7 +15,8 @@ namespace ContactManagement.DAL
         public DbSet<ContactEnterprise> ContactEnterprise { get; set; }
         public DbSet<EnterpriseAdress> EnterpriseAdress { get; set; }
 
-        public ContactDBContext()
+        public ContactDBContext(DbContextOptions<ContactDBContext> options)
+            : base(options)
         {
 
         }
@@ -24,8 +25,10 @@ namespace ContactManagement.DAL
         {
             if (!optionsBuilder.IsConfigured)
             {
-              optionsBuilder.UseSqlServer("Server=localhost\\sqlexpress;Initial Catalog=ContactManagement;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=localhost\\sqlexpress;Initial Catalog=ContactManagement;Trusted_Connection=True;");
+
             }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
