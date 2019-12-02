@@ -1,0 +1,10 @@
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\bin\Debug\netcoreapp3.0\ContactManagement.DAL.deps.json
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\bin\Debug\netcoreapp3.0\ContactManagement.DAL.dll
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\obj\Debug\netcoreapp3.0\ContactManagement.DAL.csprojAssemblyReference.cache
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\obj\Debug\netcoreapp3.0\ContactManagement.DAL.AssemblyInfoInputs.cache
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\obj\Debug\netcoreapp3.0\ContactManagement.DAL.AssemblyInfo.cs
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\bin\Debug\netcoreapp3.0\ContactManagement.DAL.runtimeconfig.json
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\bin\Debug\netcoreapp3.0\ContactManagement.DAL.runtimeconfig.dev.json
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\bin\Debug\netcoreapp3.0\ContactManagement.DAL.pdb
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\obj\Debug\netcoreapp3.0\ContactManagement.DAL.dll
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.DAL\obj\Debug\netcoreapp3.0\ContactManagement.DAL.pdb
