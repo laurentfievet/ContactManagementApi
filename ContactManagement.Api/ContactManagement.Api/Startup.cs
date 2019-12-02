@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using ContactManagement.DAL;
+using ContactManagement.Repo.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,21 +31,11 @@ namespace ContactManagement.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Contact Management Api",
-                    Description = "Contact Management with ASP.NET Core 3.0"
-                });
+           
 
-            });
-
-            services.AddDbContext<ContactDBContext>(options =>
-                {
-                    options.UseSqlServer(Configuration.GetConnectionString("ContactManagementDB"));
-                });
+            services.AddEntityFramework(Configuration);
+            services.AddSwaggerService(Assembly.GetExecutingAssembly().FullName.Split(',')[0]);
+            services.AddRepositories();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

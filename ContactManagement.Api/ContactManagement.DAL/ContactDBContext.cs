@@ -9,11 +9,11 @@ namespace ContactManagement.DAL
     public partial class ContactDBContext : DbContext
     {
         //entities
-        public DbSet<Adress> Adress { get; set; }
-        public DbSet<Contact> Contact { get; set; }
-        public DbSet<Enterprise> Enterprise { get; set; }
-        public DbSet<ContactEnterprise> ContactEnterprise { get; set; }
-        public DbSet<EnterpriseAdress> EnterpriseAdress { get; set; }
+        public virtual DbSet<Adress> Adress { get; set; }
+        public virtual DbSet<Contact> Contact { get; set; }
+        public virtual DbSet<Enterprise> Enterprise { get; set; }
+        public virtual DbSet<ContactEnterprise> ContactEnterprise { get; set; }
+        public virtual DbSet<EnterpriseAdress> EnterpriseAdress { get; set; }
 
         public ContactDBContext(DbContextOptions<ContactDBContext> options)
             : base(options)

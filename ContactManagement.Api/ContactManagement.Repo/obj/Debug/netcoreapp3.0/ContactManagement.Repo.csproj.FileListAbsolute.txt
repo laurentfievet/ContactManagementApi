@@ -6,3 +6,6 @@ D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.A
 D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Repo\obj\Debug\netcoreapp3.0\ContactManagement.Repo.AssemblyInfo.cs
 D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Repo\obj\Debug\netcoreapp3.0\ContactManagement.Repo.dll
 D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Repo\obj\Debug\netcoreapp3.0\ContactManagement.Repo.pdb
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Repo\bin\Debug\netcoreapp3.0\ContactManagement.DAL.dll
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Repo\bin\Debug\netcoreapp3.0\ContactManagement.DAL.pdb
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Repo\obj\Debug\netcoreapp3.0\ContactManagement.Repo.csproj.CopyComplete

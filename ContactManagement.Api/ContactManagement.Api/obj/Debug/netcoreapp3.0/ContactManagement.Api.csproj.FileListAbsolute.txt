@@ -59,3 +59,8 @@ D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.A
 D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Api\obj\Debug\netcoreapp3.0\ContactManagement.Api.MvcApplicationPartsAssemblyInfo.cs
 D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Api\obj\Debug\netcoreapp3.0\ContactManagement.Api.MvcApplicationPartsAssemblyInfo.cache
 D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Api\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.InMemory.dll
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Api\bin\Debug\netcoreapp3.0\FluentValidation.dll
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Api\bin\Debug\netcoreapp3.0\FluentValidation.AspNetCore.dll
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Api\bin\Debug\netcoreapp3.0\FluentValidation.DependencyInjectionExtensions.dll
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Api\bin\Debug\netcoreapp3.0\ContactManagement.Repo.dll
+D:\Users\lfi\source\repos\laurentfievet\ContactManagementApi\ContactManagement.Api\ContactManagement.Api\bin\Debug\netcoreapp3.0\ContactManagement.Repo.pdb
