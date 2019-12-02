@@ -2,6 +2,7 @@
 using ContactManagement.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -48,6 +49,15 @@ namespace ContactManagement.Repo.Repositories
                           where dbEnterprise.Id == id
                           select dbEnterprise)
                           .SingleOrDefaultAsync();
+        }
+
+        public async Task<List<Enterprise>> GetAllAsync()
+        {
+            return await (from dbEnterprise in _dbContext.Enterprise
+                           .Include(b => b.ContactEnterprise).ThenInclude(b => b.Contact)
+                           .Include(b => b.EnterpriseAdress).ThenInclude(b => b.Adress)
+                          select dbEnterprise)
+                          .ToListAsync();
         }
 
 
