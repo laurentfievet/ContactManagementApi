@@ -1,16 +1,12 @@
 using ContactManagement.Api.Controllers;
-using ContactManagement.DAL.Entities;
-using ContactManagement.Repo.Models;
+using ContactManagement.Api.Validators;
 using ContactManagement.Repo.Services;
-using ContactManagement.Repo.Services.Implementations;
 using ContactManagement.xUnitTest.ServiceTest;
 using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.TestHelper;
 using Xunit;
+using ContactManagement.Repo.Models;
 
 namespace ContactManagement.xUnitTest
 {
@@ -18,19 +14,14 @@ namespace ContactManagement.xUnitTest
     {
         ContactController _controller;
         IContactService _contactService;
-
-        private readonly Mock<IContactService> _mockService;
-        private readonly ContactController _contactController;
+        private ContactValidator validator;
 
         public ContactControllerTest()
         {
             _contactService = new ContactServiceFake();
             _controller = new ContactController(_contactService);
 
-            _mockService = new Mock<IContactService>();
-            _mockService.Setup(repo => repo.ListAsync()).Returns(Task.FromResult(Enumerable.Empty<Contact>()));
-            _contactController = new ContactController(_mockService.Object);
-
+            validator = new ContactValidator();
         }
 
         [Fact]
@@ -54,23 +45,19 @@ namespace ContactManagement.xUnitTest
         [Fact]
         public void PostContactFreelance_WithOutVATNumber()
         {
-            var dto = new ContactDTO { FirstName = "Laurent", LastName = "FIEVET", GSMNumber = "111515151", IsFreelance = true, VATNumber = "", Address = new AddressDTO { Name = "test", City = "", Country = "", PostalCode = "", Street = "", StreetNumber = "" } };
-            var badRequestResult = _contactController.PutOrPost(dto);
+            var person = new ContactDTO { Id = 1, FirstName = "Laurent", LastName = "FIEVET", GSMNumber = "111515151", IsFreelance = true, VATNumber = "2145245545", Address = new AddressDTO { Name = "test", City = "gfdfd", Country = "fdfdfd", PostalCode = "dfdfd", Street = "fdfdfd", StreetNumber = "fdfdfdfd" } };
 
-            // Assert
-            Assert.IsType<BadRequestResult>(badRequestResult.Result);
+            validator.ShouldNotHaveValidationErrorFor(x => x.VATNumber, person);
         }
 
         [Fact]
         public void PostContactFreelance_WithVATNumber()
         {
-           
+            var person = new ContactDTO { Id = 1, FirstName = "Laurent", LastName = "FIEVET", GSMNumber = "111515151", IsFreelance = true, VATNumber = "", Address = new AddressDTO { Name = "test", City = "gfdfd", Country = "fdfdfd", PostalCode = "dfdfd", Street = "fdfdfd", StreetNumber = "fdfdfdfd" } };
 
-            var dto = new ContactDTO { FirstName = "Laurent", LastName = "FIEVET", GSMNumber = "111515151", IsFreelance = true, VATNumber = "dfdfdfdfdfd", Address = new AddressDTO { Name = "test", City = "fdsfdsf", Country = "fdsfdsf", PostalCode = "sdfdsfs", Street = "sfdsfdsfds", StreetNumber = "fdsfsdfsd" } };
-            var okResult = _contactController.PutOrPost(dto);
+            validator.ShouldHaveValidationErrorFor(x => x.VATNumber, person);
 
-            // Assert
-            Assert.IsType<OkResult>(okResult.Result);
         }
+
     }
 }
