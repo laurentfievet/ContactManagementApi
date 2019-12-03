@@ -37,7 +37,7 @@
         </member>
         <member name="M:ContactManagement.Api.Controllers.ContactController.Delete(System.Int64)">
             <summary>
-            Delete a contact
+            Delete existing contact
             </summary>
             <param name="id"></param>
             <returns></returns>
@@ -83,7 +83,7 @@
         </member>
         <member name="M:ContactManagement.Api.Controllers.EnterpriseController.Delete(System.Int64)">
             <summary>
-            Delmete existing enterprise
+            Delete existing enterprise
             </summary>
             <param name="id"></param>
             <returns></returns>
