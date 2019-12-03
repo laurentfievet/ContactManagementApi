@@ -1,0 +1,17 @@
+﻿using ContactManagement.DAL.Entities;
+using ContactManagement.Repo.Models;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ContactManagement.Repo.Services
+{
+    public interface IContactService
+    {
+        Task<IEnumerable<Contact>> ListAsync();
+        Task<Contact> GetByIdAsync(long id);
+        Task<Contact> SaveAsync(ContactDTO contactDTO);
+        Task DeleteAsync(long id);
+    }
+}

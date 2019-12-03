@@ -1,8 +1,11 @@
 ﻿using ContactManagement.DAL;
 using ContactManagement.Repo.Repositories;
+using ContactManagement.Repo.Services;
+using ContactManagement.Repo.Services.Implementations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
@@ -25,7 +28,7 @@ namespace ContactManagement.Repo.Utilities
         {
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info
+                options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "Contact Management API",
                     Version = "V1",
@@ -41,7 +44,11 @@ namespace ContactManagement.Repo.Utilities
             services.AddScoped<IEnterpriseRepository, EnterpriseRepository>();
             services.AddScoped<IAdressRepository, AdressRepository>();
         }
+        public static void AddServices(this IServiceCollection services)
+        {
+            services.AddScoped<IContactService, ContactService>();
 
+        }
 
     }
 }

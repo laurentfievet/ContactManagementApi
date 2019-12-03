@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using ContactManagement.DAL;
 using ContactManagement.Repo.Utilities;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,11 +32,12 @@ namespace ContactManagement.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-           
+            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddEntityFramework(Configuration);
             services.AddSwaggerService(Assembly.GetExecutingAssembly().FullName.Split(',')[0]);
             services.AddRepositories();
+            services.AddServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
