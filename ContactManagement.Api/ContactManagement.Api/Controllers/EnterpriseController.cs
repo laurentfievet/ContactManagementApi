@@ -51,7 +51,11 @@ namespace ContactManagement.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] long id)
         {
-            return Ok(await _enterpriseService.GetByIdAsync(id));
+            var item = await _enterpriseService.GetByIdAsync(id);
+            if (item == null)
+                return NotFound(id);
+
+            return Ok(item);
         }
 
         /// <summary>
