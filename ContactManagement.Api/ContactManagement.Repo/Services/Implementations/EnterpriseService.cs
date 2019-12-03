@@ -28,7 +28,7 @@ namespace ContactManagement.Repo.Services.Implementations
             return await _enterpriseRepository.GetAllAsync();
         }
 
-        public async Task<Enterprise> GetByIdAsync(long id)
+        public async Task<EnterpriseDTOFull> GetByIdAsync(long id)
         {
             var item = await _enterpriseRepository.GetByIdAsync(id);
             return item;
@@ -39,7 +39,7 @@ namespace ContactManagement.Repo.Services.Implementations
         {
             if (enterpriseDTO != null)
             {
-                Enterprise enterprise = await _enterpriseRepository.GetByIdAsync(enterpriseDTO.Id);
+                Enterprise enterprise = await _enterpriseRepository.FindByIdAsync(enterpriseDTO.Id);
                 if (enterprise == null)
                     enterprise = new Enterprise();
 
@@ -71,7 +71,7 @@ namespace ContactManagement.Repo.Services.Implementations
         public async Task<Enterprise> AddAdressesAsync(long enterpriseId, List<EnterpriseAdressDTO> enterpriseDTOList)
         {
            
-                Enterprise enterprise = await _enterpriseRepository.GetByIdAsync(enterpriseId);
+                Enterprise enterprise = await _enterpriseRepository.FindByIdAsync(enterpriseId);
                 if (enterprise == null)
                     throw new ArgumentNullException(nameof(enterprise));
 
@@ -108,7 +108,7 @@ namespace ContactManagement.Repo.Services.Implementations
 
         public async Task DeleteAsync(long id)
         {
-            var item = await _enterpriseRepository.GetByIdAsync(id);
+            var item = await _enterpriseRepository.FindByIdAsync(id);
 
             if (item == null) throw new NotFoundException(id);
 

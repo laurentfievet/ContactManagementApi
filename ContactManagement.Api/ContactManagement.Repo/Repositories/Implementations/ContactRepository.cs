@@ -1,9 +1,11 @@
 ﻿using ContactManagement.DAL;
 using ContactManagement.DAL.Entities;
+using ContactManagement.Repo.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ContactManagement.Repo.Repositories
@@ -41,12 +43,22 @@ namespace ContactManagement.Repo.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Contact> GetByIdAsync(long id)
+        public async Task<Contact> FindByIdAsync(long id)
         {
             return await (from dcContact in _dbContext.Contact
                            .Include(b => b.ContactEnterprise).ThenInclude(b => b.Enterprise)
                           where dcContact.Id == id
                           select dcContact)
+                          .SingleOrDefaultAsync();
+        }
+
+        public async Task<ContactDTO> GetByIdAsync(long id)
+        {
+            return await (from dcContact in _dbContext.Contact
+                           .Include(b => b.ContactEnterprise).ThenInclude(b => b.Enterprise)
+                          where dcContact.Id == id
+                          select dcContact)
+                          .Select(SelectContact)
                           .SingleOrDefaultAsync();
         }
 
@@ -81,5 +93,33 @@ namespace ContactManagement.Repo.Repositories
                 await ReplaceAsync(contact);
             }
         }
+
+        private Expression<Func<Contact, ContactDTO>> SelectContact = (item =>
+          new ContactDTO()
+          {
+              Id = item.Id,
+              Adress = new AdressDTO
+              {
+                  Id = item.Adress.Id,
+                  City = item.Adress.City,
+                  Country = item.Adress.Country,
+                  Name = item.Adress.Name,
+                  PostalCode = item.Adress.PostalCode,
+                  Street = item.Adress.Street,
+                  StreetNumber = item.Adress.StreetNumber
+              },
+              FirstName = item.FirstName,
+              LastName = item.LastName,
+              GSMNumber = item.GSMNumber,
+              IsFreelance = item.IsFreelance,
+              TVANumber = item.TVANumber,
+              Enterprises = item.ContactEnterprise.Select(x => new EnterpriseDTOBase()
+              { 
+                    Id = x.Enterprise.Id,
+                    Name = x.Enterprise.Name,
+                    TVANumber = x.Enterprise.TVANumber
+              }).ToList()
+             
+          });
     }
 }

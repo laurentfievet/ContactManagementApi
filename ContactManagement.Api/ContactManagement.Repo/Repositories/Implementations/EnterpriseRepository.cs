@@ -1,9 +1,11 @@
 ﻿using ContactManagement.DAL;
 using ContactManagement.DAL.Entities;
+using ContactManagement.Repo.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ContactManagement.Repo.Repositories
@@ -41,13 +43,24 @@ namespace ContactManagement.Repo.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Enterprise> GetByIdAsync(long id)
+        public async Task<Enterprise> FindByIdAsync(long id)
         {
             return await (from dbEnterprise in _dbContext.Enterprise
                           .Include(b => b.ContactEnterprise).ThenInclude(b => b.Contact)
                            .Include(b => b.EnterpriseAdress).ThenInclude(b => b.Adress)
                           where dbEnterprise.Id == id
                           select dbEnterprise)
+                          .SingleOrDefaultAsync();
+        }
+
+        public async Task<EnterpriseDTOFull> GetByIdAsync(long id)
+        {
+            return await (from dbEnterprise in _dbContext.Enterprise
+                          .Include(b => b.ContactEnterprise).ThenInclude(b => b.Contact)
+                           .Include(b => b.EnterpriseAdress).ThenInclude(b => b.Adress)
+                          where dbEnterprise.Id == id
+                          select dbEnterprise)
+                          .Select(SelectEnterprise)
                           .SingleOrDefaultAsync();
         }
 
@@ -83,5 +96,50 @@ namespace ContactManagement.Repo.Repositories
                 await ReplaceAsync(enterprise);
             }
         }
+
+        private Expression<Func<Enterprise, EnterpriseDTOFull>> SelectEnterprise = (item =>
+         new EnterpriseDTOFull()
+         {
+             Id = item.Id,
+             TVANumber = item.TVANumber,
+             Name = item.Name,
+             Adresses = item.EnterpriseAdress.Select(x => new EnterpriseAdressDTO()
+             {
+                 Id = x.Adress.Id,
+                 City = x.Adress.City,
+                 Country = x.Adress.Country,
+                 Name = x.Adress.Name,
+                 PostalCode = x.Adress.PostalCode,
+                 Street = x.Adress.Street,
+                 StreetNumber = x.Adress.StreetNumber,
+                 HeadOffice = x.HeadOffice
+             }).ToList()
+
+
+
+
+             //Adress = new AdressDTO
+             //{
+             //    Id = item.Adress.Id,
+             //    City = item.Adress.City,
+             //    Country = item.Adress.Country,
+             //    Name = item.Adress.Name,
+             //    PostalCode = item.Adress.PostalCode,
+             //    Street = item.Adress.Street,
+             //    StreetNumber = item.Adress.StreetNumber
+             //},
+             //FirstName = item.FirstName,
+             //LastName = item.LastName,
+             //GSMNumber = item.GSMNumber,
+             //IsFreelance = item.IsFreelance,
+
+             //Enterprises = item.ContactEnterprise.Select(x => new EnterpriseDTOBase()
+             //{
+             //    Id = x.Enterprise.Id,
+             //    Name = x.Enterprise.Name,
+             //    TVANumber = x.Enterprise.TVANumber
+             //}).ToList()
+
+         });
     }
 }

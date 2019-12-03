@@ -75,9 +75,9 @@ namespace ContactManagement.Api
             {
                 using (var context = scope.ServiceProvider.GetService<ContactDBContext>())
                 {
-                    context.Database.EnsureDeleted();
-                    context.Database.EnsureCreated();
-                    //context.Database.Migrate();
+                    //context.Database.EnsureDeleted();
+                    //context.Database.EnsureCreated();
+                    context.Database.Migrate();
                 }
             }
         }

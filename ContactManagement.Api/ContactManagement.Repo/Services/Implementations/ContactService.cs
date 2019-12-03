@@ -28,7 +28,7 @@ namespace ContactManagement.Repo.Services.Implementations
             return await _contactRepository.GetAllAsync();
         }
 
-        public async Task<Contact> GetByIdAsync(long id)
+        public async Task<ContactDTO> GetByIdAsync(long id)
         {
             var item = await _contactRepository.GetByIdAsync(id);
             return item;
@@ -39,22 +39,25 @@ namespace ContactManagement.Repo.Services.Implementations
         {
             if (contactDTO != null)
             {
-                Contact contact = await _contactRepository.GetByIdAsync(contactDTO.Id);
+                Contact contact = await _contactRepository.FindByIdAsync(contactDTO.Id);
                 if (contact == null)
                     contact = new Contact();
 
                 Mapper.Map<ContactDTO, Contact>(contactDTO, contact);
 
-                contact.ContactEnterprise = contactDTO.Enterprises.Select(x => new ContactEnterprise()
+                if (contactDTO.Enterprises != null)
                 {
-                    ContactId = contactDTO.Id,
-                    Enterprise = new Enterprise
-                    { 
-                        Id = x.Id,
-                        Name = x.Name,
-                        TVANumber = x.TVANumber
-                    }
-                }).ToList();
+                    contact.ContactEnterprise = contactDTO.Enterprises.Select(x => new ContactEnterprise()
+                    {
+                        ContactId = contactDTO.Id,
+                        Enterprise = new Enterprise
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            TVANumber = x.TVANumber
+                        }
+                    }).ToList();
+                }
 
                 await _contactRepository.UpsertAsync(contact);
 
@@ -66,7 +69,7 @@ namespace ContactManagement.Repo.Services.Implementations
 
        public async Task DeleteAsync(long id)
         {
-            var item = await _contactRepository.GetByIdAsync(id);
+            var item = await _contactRepository.FindByIdAsync(id);
 
             if (item == null) throw new NotFoundException(id);
 

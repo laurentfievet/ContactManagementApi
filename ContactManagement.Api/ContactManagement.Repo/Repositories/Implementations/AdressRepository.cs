@@ -1,9 +1,11 @@
 ﻿using ContactManagement.DAL;
 using ContactManagement.DAL.Entities;
+using ContactManagement.Repo.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ContactManagement.Repo.Repositories
@@ -41,7 +43,17 @@ namespace ContactManagement.Repo.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Adress> GetByIdAsync(long id)
+        public async Task<AdressDTO> GetByIdAsync(long id)
+        {
+            return await (from dbAdress in _dbContext.Adress
+                           .Include(b => b.EnterpriseAdress).ThenInclude(b => b.Enterprise)
+                          where dbAdress.Id == id
+                          select dbAdress)
+                          .Select(SelectAdress)
+                          .SingleOrDefaultAsync();
+        }
+
+        public async Task<Adress> FindByIdAsync(long id)
         {
             return await (from dbAdress in _dbContext.Adress
                            .Include(b => b.EnterpriseAdress).ThenInclude(b => b.Enterprise)
@@ -49,6 +61,7 @@ namespace ContactManagement.Repo.Repositories
                           select dbAdress)
                           .SingleOrDefaultAsync();
         }
+
         public async Task<List<Adress>> GetAllAsync()
         {
             return await (from dbAdress in _dbContext.Adress
@@ -79,5 +92,17 @@ namespace ContactManagement.Repo.Repositories
                 await ReplaceAsync(adress);
             }
         }
+
+        private Expression<Func<Adress, AdressDTO>> SelectAdress = (item =>
+          new AdressDTO()
+          {
+                Id = item.Id,
+                 City = item.City,
+                 Country = item.Country,
+                 Name = item.Name,
+                 PostalCode = item.PostalCode,
+                 Street = item.Street,
+                 StreetNumber = item.StreetNumber
+          });
     }
 }

@@ -10,7 +10,7 @@ namespace ContactManagement.Repo.Services
     public interface IEnterpriseService
     {
         Task<IEnumerable<Enterprise>> ListAsync();
-        Task<Enterprise> GetByIdAsync(long id);
+        Task<EnterpriseDTOFull> GetByIdAsync(long id);
         Task<Enterprise> SaveAsync(EnterpriseDTOFull enterpriseDTO);
         Task<Enterprise> AddAdressesAsync(long enterpriseId, List<EnterpriseAdressDTO> enterpriseDTOList);
         Task DeleteAsync(long id);
