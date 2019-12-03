@@ -10,11 +10,9 @@ namespace ContactManagement.Repo.Mappers
     {
         public EnterpriseMapProfile()
         {
-            CreateMap<EnterpriseDTOBase, Enterprise>();
-            CreateMap<Enterprise, EnterpriseDTOBase>();
+            CreateMap<EnterpriseDTOBase, Enterprise>().ReverseMap();
+            CreateMap<EnterpriseDTOFull, Enterprise>().ReverseMap();
 
-            CreateMap<EnterpriseDTOFull, Enterprise>();
-            CreateMap<Enterprise, EnterpriseDTOFull>();
         }
     }
 }

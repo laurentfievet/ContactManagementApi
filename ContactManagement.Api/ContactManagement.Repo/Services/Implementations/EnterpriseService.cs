@@ -7,7 +7,6 @@ using ContactManagement.Repo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactManagement.Repo.Services.Implementations
@@ -15,7 +14,6 @@ namespace ContactManagement.Repo.Services.Implementations
     public class EnterpriseService : IEnterpriseService
     {
         private readonly IEnterpriseRepository _enterpriseRepository;
-        private ContactDBContext _dbContext;
 
         public EnterpriseService(IEnterpriseRepository enterpriseRepository, ContactDBContext dbContext)
         {

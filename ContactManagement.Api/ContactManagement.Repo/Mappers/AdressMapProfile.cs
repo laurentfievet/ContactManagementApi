@@ -10,8 +10,8 @@ namespace ContactManagement.Repo.Mappers
     {
         public AdressMapProfile()
         {
-            CreateMap<AdressDTO, Adress>();
-            CreateMap<Adress, AdressDTO>();
+            CreateMap<AdressDTO, Adress>().ReverseMap();
+      
         }
     }
 }

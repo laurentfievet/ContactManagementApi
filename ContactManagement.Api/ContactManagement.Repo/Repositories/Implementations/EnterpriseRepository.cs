@@ -12,7 +12,7 @@ namespace ContactManagement.Repo.Repositories
 {
     public class EnterpriseRepository : IEnterpriseRepository
     {
-        private ContactDBContext _dbContext;
+        private readonly ContactDBContext _dbContext;
         public EnterpriseRepository(ContactDBContext dbContext)
         {
             _dbContext = dbContext;
@@ -87,14 +87,12 @@ namespace ContactManagement.Repo.Repositories
 
         public async Task UpsertAsync(Enterprise enterprise)
         {
-            if (enterprise.Id == 0)
+            var isUpdate = await this._dbContext.Enterprise.AnyAsync(x => x.Id == enterprise.Id);
+            if (isUpdate)
             {
-                await CreateAsync(enterprise);
+                await this.ReplaceAsync(enterprise);
             }
-            else
-            {
-                await ReplaceAsync(enterprise);
-            }
+            await this.CreateAsync(enterprise);
         }
 
         private Expression<Func<Enterprise, EnterpriseDTOFull>> SelectEnterprise = (item =>
@@ -114,32 +112,6 @@ namespace ContactManagement.Repo.Repositories
                  StreetNumber = x.Adress.StreetNumber,
                  HeadOffice = x.HeadOffice
              }).ToList()
-
-
-
-
-             //Adress = new AdressDTO
-             //{
-             //    Id = item.Adress.Id,
-             //    City = item.Adress.City,
-             //    Country = item.Adress.Country,
-             //    Name = item.Adress.Name,
-             //    PostalCode = item.Adress.PostalCode,
-             //    Street = item.Adress.Street,
-             //    StreetNumber = item.Adress.StreetNumber
-             //},
-             //FirstName = item.FirstName,
-             //LastName = item.LastName,
-             //GSMNumber = item.GSMNumber,
-             //IsFreelance = item.IsFreelance,
-
-             //Enterprises = item.ContactEnterprise.Select(x => new EnterpriseDTOBase()
-             //{
-             //    Id = x.Enterprise.Id,
-             //    Name = x.Enterprise.Name,
-             //    TVANumber = x.Enterprise.TVANumber
-             //}).ToList()
-
          });
     }
 }

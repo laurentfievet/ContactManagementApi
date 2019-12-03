@@ -1,21 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using ContactManagement.DAL;
 using ContactManagement.Repo.Utilities;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 
 namespace ContactManagement.Api
@@ -47,7 +40,7 @@ namespace ContactManagement.Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ContactDBContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -71,15 +64,9 @@ namespace ContactManagement.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contact Management Api V1");
             });
-            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-            {
-                using (var context = scope.ServiceProvider.GetService<ContactDBContext>())
-                {
-                    //context.Database.EnsureDeleted();
-                    //context.Database.EnsureCreated();
-                    context.Database.Migrate();
-                }
-            }
+
+            dbContext.Database.Migrate();
+               
         }
     }
 }

@@ -12,7 +12,7 @@ namespace ContactManagement.Repo.Repositories
 {
     public class ContactRepository : IContactRepository
     {
-        private ContactDBContext _dbContext;
+        private readonly ContactDBContext _dbContext;
         public ContactRepository(ContactDBContext dbContext)
         {
             _dbContext = dbContext;
@@ -84,14 +84,13 @@ namespace ContactManagement.Repo.Repositories
 
         public async Task UpsertAsync(Contact contact)
         {
-            if (contact.Id == 0)
+            var isUpdate = await this._dbContext.Contact.AnyAsync(x => x.Id == contact.Id);
+            if (isUpdate)
             {
-                await CreateAsync(contact);
+                await this.ReplaceAsync(contact);
             }
-            else
-            {
-                await ReplaceAsync(contact);
-            }
+           
+            await this.CreateAsync(contact);
         }
 
         private Expression<Func<Contact, ContactDTO>> SelectContact = (item =>

@@ -12,7 +12,7 @@ namespace ContactManagement.Repo.Repositories
 {
     public class AdressRepository : IAdressRepository
     {
-        private ContactDBContext _dbContext;
+        private readonly ContactDBContext _dbContext;
         public AdressRepository(ContactDBContext dbContext)
         {
             _dbContext = dbContext;
@@ -83,14 +83,12 @@ namespace ContactManagement.Repo.Repositories
 
         public async Task UpsertAsync(Adress adress)
         {
-            if (adress.Id == 0)
+            var isUpdate = await this._dbContext.Adress.AnyAsync(x => x.Id == adress.Id);
+            if (isUpdate)
             {
-                await CreateAsync(adress);
+                await this.ReplaceAsync(adress);
             }
-            else
-            {
-                await ReplaceAsync(adress);
-            }
+            await this.CreateAsync(adress);
         }
 
         private Expression<Func<Adress, AdressDTO>> SelectAdress = (item =>

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ContactManagement.DAL
 {
-    public partial class ContactDBContext : DbContext
+    public class ContactDBContext : DbContext
     {
         //entities
         public virtual DbSet<Adress> Adress { get; set; }

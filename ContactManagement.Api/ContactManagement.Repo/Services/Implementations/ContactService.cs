@@ -7,7 +7,6 @@ using ContactManagement.Repo.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactManagement.Repo.Services.Implementations
@@ -15,7 +14,6 @@ namespace ContactManagement.Repo.Services.Implementations
     public class ContactService : IContactService
     {
         private readonly IContactRepository _contactRepository;
-        private ContactDBContext _dbContext;
 
         public ContactService(IContactRepository contactRepository, ContactDBContext dbContext)
         {

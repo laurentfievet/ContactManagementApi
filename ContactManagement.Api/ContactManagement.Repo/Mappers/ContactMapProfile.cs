@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ContactManagement.DAL.Entities;
 using ContactManagement.Repo.Models;
-using System.Linq;
 
 namespace ContactManagement.Repo.Mappers
 {
@@ -10,10 +9,7 @@ namespace ContactManagement.Repo.Mappers
     {
         public ContactMapProfile()
         {
-            CreateMap<ContactDTO, Contact>();
-               
-
-            CreateMap<Contact, ContactDTO>();
+            CreateMap<ContactDTO, Contact>().ReverseMap();
         }
     }
 }
