@@ -14,6 +14,5 @@ namespace ContactManagement.Repo.Models
     public class EnterpriseDTOFull : EnterpriseDTOBase
     {
         public List<EnterpriseAdressDTO> Adresses { get; set; }
-        public List<ContactDTO> Contacts { get; set; }
     }
 }

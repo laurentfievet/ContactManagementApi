@@ -6,6 +6,7 @@ using ContactManagement.Repo.Repositories;
 using ContactManagement.Repo.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,6 +44,17 @@ namespace ContactManagement.Repo.Services.Implementations
                     contact = new Contact();
 
                 Mapper.Map<ContactDTO, Contact>(contactDTO, contact);
+
+                contact.ContactEnterprise = contactDTO.Enterprises.Select(x => new ContactEnterprise()
+                {
+                    ContactId = contactDTO.Id,
+                    Enterprise = new Enterprise
+                    { 
+                        Id = x.Id,
+                        Name = x.Name,
+                        TVANumber = x.TVANumber
+                    }
+                }).ToList();
 
                 await _contactRepository.UpsertAsync(contact);
 

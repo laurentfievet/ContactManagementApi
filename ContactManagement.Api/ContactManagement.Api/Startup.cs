@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 namespace ContactManagement.Api
 {
@@ -32,7 +33,10 @@ namespace ContactManagement.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
+            services.AddMvc(option => option.EnableEndpointRouting = false)
+                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore)
+                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddEntityFramework(Configuration);
             services.AddSwaggerService(Assembly.GetExecutingAssembly().FullName.Split(',')[0]);

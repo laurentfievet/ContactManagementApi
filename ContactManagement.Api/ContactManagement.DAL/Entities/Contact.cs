@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ContactManagement.DAL.Entities
 {
@@ -27,6 +28,7 @@ namespace ContactManagement.DAL.Entities
         public long AdressId { get; set; }
 
         public virtual Adress Adress { get; set; }
+
 
         public ICollection<ContactEnterprise> ContactEnterprise { get; set; } = new List<ContactEnterprise>();
 

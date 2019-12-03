@@ -16,33 +16,33 @@ namespace ContactManagement.Api.Controllers
     [ApiController]
     [Route("[controller]")]
     [ValidateModel]
-    public class ContactController : ControllerBase
+    public class EnterpriseController : ControllerBase
     {
 
-        private readonly IContactService _contactService;
+        private readonly IEnterpriseService _enterpriseService;
 
-        public ContactController(IContactService contactService)
+        public EnterpriseController(IEnterpriseService enterpriseService)
         {
 
-            _contactService = contactService;
+            _enterpriseService = enterpriseService;
         }
 
         [HttpGet]
         public async Task<ActionResult> GetAll()
         {
-            return Ok(await _contactService.ListAsync());
+            return Ok(await _enterpriseService.ListAsync());
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] long id)
         {
-            return Ok(await _contactService.GetByIdAsync(id));
+            return Ok(await _enterpriseService.GetByIdAsync(id));
         }
 
         [HttpPost, HttpPut]
-        public async Task<IActionResult> PutOrPost([FromBody] ContactDTO contactDTO)
+        public async Task<IActionResult> PutOrPost([FromBody] EnterpriseDTOFull enterpriseDTO)
         {
-            var item = await _contactService.SaveAsync(contactDTO);
+            var item = await _enterpriseService.SaveAsync(enterpriseDTO);
             return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
 
         }
@@ -50,7 +50,7 @@ namespace ContactManagement.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] long id)
         {
-            await _contactService.DeleteAsync(id);
+            await _enterpriseService.DeleteAsync(id);
             return NoContent();
         }
     }
