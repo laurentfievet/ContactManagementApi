@@ -7,7 +7,7 @@ namespace ContactManagement.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Adress",
+                name: "Address",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -21,7 +21,7 @@ namespace ContactManagement.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Adress", x => x.Id);
+                    table.PrimaryKey("PK_Address", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -31,7 +31,7 @@ namespace ContactManagement.DAL.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
-                    TVANumber = table.Column<string>(maxLength: 20, nullable: false)
+                    VATNumber = table.Column<string>(maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,39 +48,39 @@ namespace ContactManagement.DAL.Migrations
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     GSMNumber = table.Column<string>(maxLength: 20, nullable: false),
                     IsFreelance = table.Column<bool>(nullable: false),
-                    TVANumber = table.Column<string>(maxLength: 20, nullable: true),
-                    AdressId = table.Column<long>(nullable: false)
+                    VATNumber = table.Column<string>(maxLength: 20, nullable: true),
+                    AddressId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Contact", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contact_Adress_AdressId",
-                        column: x => x.AdressId,
-                        principalTable: "Adress",
+                        name: "FK_Contact_Address_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EnterpriseAdress",
+                name: "EnterpriseAddress",
                 columns: table => new
                 {
-                    AdressId = table.Column<long>(nullable: false),
+                    AddressId = table.Column<long>(nullable: false),
                     EnterpriseId = table.Column<long>(nullable: false),
                     HeadOffice = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EnterpriseAdress", x => new { x.AdressId, x.EnterpriseId });
+                    table.PrimaryKey("PK_EnterpriseAddress", x => new { x.AddressId, x.EnterpriseId });
                     table.ForeignKey(
-                        name: "FK_EnterpriseAdress_Adress_AdressId",
-                        column: x => x.AdressId,
-                        principalTable: "Adress",
+                        name: "FK_EnterpriseAddress_Address_AddressId",
+                        column: x => x.AddressId,
+                        principalTable: "Address",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EnterpriseAdress_Enterprise_EnterpriseId",
+                        name: "FK_EnterpriseAddress_Enterprise_EnterpriseId",
                         column: x => x.EnterpriseId,
                         principalTable: "Enterprise",
                         principalColumn: "Id",
@@ -112,9 +112,9 @@ namespace ContactManagement.DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Contact_AdressId",
+                name: "IX_Contact_AddressId",
                 table: "Contact",
-                column: "AdressId");
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ContactEnterprise_EnterpriseId",
@@ -122,8 +122,8 @@ namespace ContactManagement.DAL.Migrations
                 column: "EnterpriseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EnterpriseAdress_EnterpriseId",
-                table: "EnterpriseAdress",
+                name: "IX_EnterpriseAddress_EnterpriseId",
+                table: "EnterpriseAddress",
                 column: "EnterpriseId");
         }
 
@@ -133,7 +133,7 @@ namespace ContactManagement.DAL.Migrations
                 name: "ContactEnterprise");
 
             migrationBuilder.DropTable(
-                name: "EnterpriseAdress");
+                name: "EnterpriseAddress");
 
             migrationBuilder.DropTable(
                 name: "Contact");
@@ -142,7 +142,7 @@ namespace ContactManagement.DAL.Migrations
                 name: "Enterprise");
 
             migrationBuilder.DropTable(
-                name: "Adress");
+                name: "Address");
         }
     }
 }

@@ -68,15 +68,15 @@ namespace ContactManagement.Api.Controllers
         }
 
         /// <summary>
-        /// Add Adresses to an existing enterprise
+        /// Add Addresses to an existing enterprise
         /// </summary>
         /// <param name="enterpriseId"></param>
-        /// <param name="enterpriseAdressList"></param>
+        /// <param name="enterpriseAddressList"></param>
         /// <returns></returns>
-        [ HttpPut("{enterpriseId}/addAdresses")]
-        public async Task<IActionResult> addAdresses(long enterpriseId, [FromBody] EnterpriseAdresListDTO enterpriseAdressList)
+        [ HttpPut("{enterpriseId}/addAddresses")]
+        public async Task<IActionResult> addAddresses(long enterpriseId, [FromBody] EnterpriseAddresListDTO enterpriseAddressList)
         {
-            var item = await _enterpriseService.AddAdressesAsync(enterpriseId, enterpriseAdressList.enterpriseAdresses);
+            var item = await _enterpriseService.AddAddressesAsync(enterpriseId, enterpriseAddressList.enterpriseAddresses);
             return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
 
         }

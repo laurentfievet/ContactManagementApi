@@ -97,26 +97,26 @@ namespace ContactManagement.Repo.Repositories
           new ContactDTO()
           {
               Id = item.Id,
-              Adress = new AdressDTO
+              Address = new AddressDTO
               {
-                  Id = item.Adress.Id,
-                  City = item.Adress.City,
-                  Country = item.Adress.Country,
-                  Name = item.Adress.Name,
-                  PostalCode = item.Adress.PostalCode,
-                  Street = item.Adress.Street,
-                  StreetNumber = item.Adress.StreetNumber
+                  Id = item.Address.Id,
+                  City = item.Address.City,
+                  Country = item.Address.Country,
+                  Name = item.Address.Name,
+                  PostalCode = item.Address.PostalCode,
+                  Street = item.Address.Street,
+                  StreetNumber = item.Address.StreetNumber
               },
               FirstName = item.FirstName,
               LastName = item.LastName,
               GSMNumber = item.GSMNumber,
               IsFreelance = item.IsFreelance,
-              TVANumber = item.TVANumber,
+              VATNumber = item.VATNumber,
               Enterprises = item.ContactEnterprise.Select(x => new EnterpriseDTOBase()
               { 
                     Id = x.Enterprise.Id,
                     Name = x.Enterprise.Name,
-                    TVANumber = x.Enterprise.TVANumber
+                    VATNumber = x.Enterprise.VATNumber
               }).ToList()
              
           });

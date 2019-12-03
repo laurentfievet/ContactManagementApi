@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace ContactManagement.DAL.Entities
 {
-    public class Adress
+    public class Address
     {
         [Key]
         public long Id { get; set; }
@@ -29,7 +29,7 @@ namespace ContactManagement.DAL.Entities
         public string Country { get; set; }
 
         [JsonIgnore]
-        public ICollection<EnterpriseAdress> EnterpriseAdress { get; set; } = new List<EnterpriseAdress>();
+        public ICollection<EnterpriseAddress> EnterpriseAddress { get; set; } = new List<EnterpriseAddress>();
 
     }
 }

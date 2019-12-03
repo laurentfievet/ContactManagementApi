@@ -14,9 +14,9 @@ namespace ContactManagement.DAL.Entities
         public string Name { get; set; }
         [Required]
         [StringLength(20)]
-        public string TVANumber { get; set; }
+        public string VATNumber { get; set; }
 
-        public ICollection<EnterpriseAdress> EnterpriseAdress { get; set; } = new List<EnterpriseAdress>();
+        public ICollection<EnterpriseAddress> EnterpriseAddress { get; set; } = new List<EnterpriseAddress>();
         public ICollection<ContactEnterprise> ContactEnterprise { get; set; } = new List<ContactEnterprise>();
     }
 }

@@ -11,8 +11,8 @@ namespace ContactManagement.Repo.Models
         public string LastName { get; set; }
         public string GSMNumber { get; set; }
         public bool IsFreelance { get; set; }
-        public string TVANumber { get; set; }
-        public AdressDTO Adress { get; set; }
+        public string VATNumber { get; set; }
+        public AddressDTO Address { get; set; }
         public List<EnterpriseDTOBase> Enterprises { get; set; }
     }
 

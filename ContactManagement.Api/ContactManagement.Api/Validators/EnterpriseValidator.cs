@@ -11,18 +11,18 @@ namespace ContactManagement.Api.Validators
         public EnterpriseValidator()
         {
             RuleFor(v => v.Name).NotEmpty().MaximumLength(50);
-            RuleFor(v => v.TVANumber).NotEmpty().MaximumLength(20);
-            RuleFor(v => v.Adresses).Must(list => list.Count >= 1);
-            RuleFor(x => x.Adresses).SetValidator(new UniqueInnerCollectionValidator());
-            RuleForEach(v => v.Adresses).SetValidator(new AdressValidator());
+            RuleFor(v => v.VATNumber).NotEmpty().MaximumLength(20);
+            RuleFor(v => v.Addresses).Must(list => list.Count >= 1);
+            RuleFor(x => x.Addresses).SetValidator(new UniqueInnerCollectionValidator());
+            RuleForEach(v => v.Addresses).SetValidator(new AddressValidator());
         }
 
-        public class EnterpriseAdressValidator : AbstractValidator<EnterpriseAdresListDTO>
+        public class EnterpriseAddressValidator : AbstractValidator<EnterpriseAddresListDTO>
         {
-            public EnterpriseAdressValidator()
+            public EnterpriseAddressValidator()
             {
-                RuleForEach(v => v.enterpriseAdresses).SetValidator(new AdressValidator());
-                RuleFor(x => x.enterpriseAdresses).SetValidator(new UniqueInnerCollectionValidator());
+                RuleForEach(v => v.enterpriseAddresses).SetValidator(new AddressValidator());
+                RuleFor(x => x.enterpriseAddresses).SetValidator(new UniqueInnerCollectionValidator());
             }
         }
 
@@ -36,7 +36,7 @@ namespace ContactManagement.Api.Validators
 
             protected override bool IsValid(PropertyValidatorContext context)
             {
-                var listOfCollection = context.PropertyValue as List<EnterpriseAdressDTO>;
+                var listOfCollection = context.PropertyValue as List<EnterpriseAddressDTO>;
                 if (listOfCollection == null)
                 {
                     return true;

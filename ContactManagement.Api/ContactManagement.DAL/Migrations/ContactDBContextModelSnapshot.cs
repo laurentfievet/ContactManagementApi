@@ -18,7 +18,7 @@ namespace ContactManagement.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ContactManagement.DAL.Entities.Adress", b =>
+            modelBuilder.Entity("ContactManagement.DAL.Entities.Address", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -57,7 +57,7 @@ namespace ContactManagement.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Adress");
+                    b.ToTable("Address");
                 });
 
             modelBuilder.Entity("ContactManagement.DAL.Entities.Contact", b =>
@@ -67,7 +67,7 @@ namespace ContactManagement.DAL.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("AdressId")
+                    b.Property<long>("AddressId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("FirstName")
@@ -88,13 +88,13 @@ namespace ContactManagement.DAL.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("TVANumber")
+                    b.Property<string>("VATNumber")
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AdressId");
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Contact");
                 });
@@ -126,7 +126,7 @@ namespace ContactManagement.DAL.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("TVANumber")
+                    b.Property<string>("VATNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
@@ -136,9 +136,9 @@ namespace ContactManagement.DAL.Migrations
                     b.ToTable("Enterprise");
                 });
 
-            modelBuilder.Entity("ContactManagement.DAL.Entities.EnterpriseAdress", b =>
+            modelBuilder.Entity("ContactManagement.DAL.Entities.EnterpriseAddress", b =>
                 {
-                    b.Property<long>("AdressId")
+                    b.Property<long>("AddressId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("EnterpriseId")
@@ -147,18 +147,18 @@ namespace ContactManagement.DAL.Migrations
                     b.Property<bool>("HeadOffice")
                         .HasColumnType("bit");
 
-                    b.HasKey("AdressId", "EnterpriseId");
+                    b.HasKey("AddressId", "EnterpriseId");
 
                     b.HasIndex("EnterpriseId");
 
-                    b.ToTable("EnterpriseAdress");
+                    b.ToTable("EnterpriseAddress");
                 });
 
             modelBuilder.Entity("ContactManagement.DAL.Entities.Contact", b =>
                 {
-                    b.HasOne("ContactManagement.DAL.Entities.Adress", "Adress")
+                    b.HasOne("ContactManagement.DAL.Entities.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AdressId")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -178,16 +178,16 @@ namespace ContactManagement.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ContactManagement.DAL.Entities.EnterpriseAdress", b =>
+            modelBuilder.Entity("ContactManagement.DAL.Entities.EnterpriseAddress", b =>
                 {
-                    b.HasOne("ContactManagement.DAL.Entities.Adress", "Adress")
-                        .WithMany("EnterpriseAdress")
-                        .HasForeignKey("AdressId")
+                    b.HasOne("ContactManagement.DAL.Entities.Address", "Address")
+                        .WithMany("EnterpriseAddress")
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ContactManagement.DAL.Entities.Enterprise", "Enterprise")
-                        .WithMany("EnterpriseAdress")
+                        .WithMany("EnterpriseAddress")
                         .HasForeignKey("EnterpriseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

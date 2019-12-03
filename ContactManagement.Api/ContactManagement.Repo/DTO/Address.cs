@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ContactManagement.Repo.Models
 {
-    public class AdressDTO
+    public class AddressDTO
     {
        
         public long Id { get; set; }
@@ -16,13 +16,13 @@ namespace ContactManagement.Repo.Models
         public string Country { get; set; }
     }
 
-    public class EnterpriseAdressDTO : AdressDTO
+    public class EnterpriseAddressDTO : AddressDTO
     {
         public bool HeadOffice { get; set; }
     }
 
-    public class EnterpriseAdresListDTO
+    public class EnterpriseAddresListDTO
     {
-        public List<EnterpriseAdressDTO> enterpriseAdresses { get; set; }
+        public List<EnterpriseAddressDTO> enterpriseAddresses { get; set; }
     }
 }

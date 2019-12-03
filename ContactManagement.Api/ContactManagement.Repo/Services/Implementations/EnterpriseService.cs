@@ -43,9 +43,9 @@ namespace ContactManagement.Repo.Services.Implementations
 
                 Mapper.Map<EnterpriseDTOFull, Enterprise>(enterpriseDTO, enterprise);
 
-                enterprise.EnterpriseAdress = enterpriseDTO.Adresses.Select(x => new EnterpriseAdress()
+                enterprise.EnterpriseAddress = enterpriseDTO.Addresses.Select(x => new EnterpriseAddress()
                 {
-                    Adress = new Adress { 
+                    Address = new Address { 
                                 Id = x.Id,
                                 Name = x.Name,
                                 City = x.City,
@@ -66,7 +66,7 @@ namespace ContactManagement.Repo.Services.Implementations
                 throw new ArgumentNullException(nameof(enterpriseDTO));
         }
 
-        public async Task<Enterprise> AddAdressesAsync(long enterpriseId, List<EnterpriseAdressDTO> enterpriseDTOList)
+        public async Task<Enterprise> AddAddressesAsync(long enterpriseId, List<EnterpriseAddressDTO> enterpriseDTOList)
         {
            
                 Enterprise enterprise = await _enterpriseRepository.FindByIdAsync(enterpriseId);
@@ -77,14 +77,14 @@ namespace ContactManagement.Repo.Services.Implementations
 
                     if (newHeadOffice)
                     {
-                        enterprise.EnterpriseAdress.Where(x => x.HeadOffice == true).FirstOrDefault().HeadOffice = false; 
+                        enterprise.EnterpriseAddress.Where(x => x.HeadOffice == true).FirstOrDefault().HeadOffice = false; 
                     }
                     
-                    foreach (EnterpriseAdressDTO dto in enterpriseDTOList)
+                    foreach (EnterpriseAddressDTO dto in enterpriseDTOList)
                     {
-                        enterprise.EnterpriseAdress.Add(new EnterpriseAdress
+                        enterprise.EnterpriseAddress.Add(new EnterpriseAddress
                         {
-                            Adress = new Adress { 
+                            Address = new Address { 
                                 Id = dto.Id,
                                 City = dto.City,
                                 Country = dto.Country,

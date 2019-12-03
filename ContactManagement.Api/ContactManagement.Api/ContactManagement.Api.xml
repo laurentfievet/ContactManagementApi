@@ -73,12 +73,12 @@
             <param name="enterpriseDTO"></param>
             <returns></returns>
         </member>
-        <member name="M:ContactManagement.Api.Controllers.EnterpriseController.addAdresses(System.Int64,ContactManagement.Repo.Models.EnterpriseAdresListDTO)">
+        <member name="M:ContactManagement.Api.Controllers.EnterpriseController.addAddresses(System.Int64,ContactManagement.Repo.Models.EnterpriseAddresListDTO)">
             <summary>
-            Add Adresses to an existing enterprise
+            Add Addresses to an existing enterprise
             </summary>
             <param name="enterpriseId"></param>
-            <param name="enterpriseAdressList"></param>
+            <param name="enterpriseAddressList"></param>
             <returns></returns>
         </member>
         <member name="M:ContactManagement.Api.Controllers.EnterpriseController.Delete(System.Int64)">

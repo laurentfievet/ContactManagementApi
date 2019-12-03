@@ -6,11 +6,11 @@ namespace ContactManagement.Repo.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public string TVANumber { get; set; }
+        public string VATNumber { get; set; }
     }
 
     public class EnterpriseDTOFull : EnterpriseDTOBase
     {
-        public List<EnterpriseAdressDTO> Adresses { get; set; }
+        public List<EnterpriseAddressDTO> Addresses { get; set; }
     }
 }

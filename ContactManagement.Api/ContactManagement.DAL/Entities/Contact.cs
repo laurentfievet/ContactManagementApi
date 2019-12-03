@@ -22,12 +22,12 @@ namespace ContactManagement.DAL.Entities
         public bool IsFreelance { get; set; }
 
         [StringLength(20)]
-        public string TVANumber { get; set; }
+        public string VATNumber { get; set; }
 
         [Required]
-        public long AdressId { get; set; }
+        public long AddressId { get; set; }
 
-        public virtual Adress Adress { get; set; }
+        public virtual Address Address { get; set; }
 
         [JsonIgnore]
         public ICollection<ContactEnterprise> ContactEnterprise { get; set; } = new List<ContactEnterprise>();

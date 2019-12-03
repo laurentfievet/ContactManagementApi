@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace ContactManagement.Api.Validators
 {
-    public class AdressValidator : AbstractValidator<AdressDTO>
+    public class AddressValidator : AbstractValidator<AddressDTO>
     {
-        public AdressValidator()
+        public AddressValidator()
         {
 
             RuleFor(v => v.Name).NotEmpty().MaximumLength(50);

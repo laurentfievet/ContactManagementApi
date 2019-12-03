@@ -9,11 +9,11 @@ namespace ContactManagement.DAL
     public class ContactDBContext : DbContext
     {
         //entities
-        public virtual DbSet<Adress> Adress { get; set; }
+        public virtual DbSet<Address> Address { get; set; }
         public virtual DbSet<Contact> Contact { get; set; }
         public virtual DbSet<Enterprise> Enterprise { get; set; }
         public virtual DbSet<ContactEnterprise> ContactEnterprise { get; set; }
-        public virtual DbSet<EnterpriseAdress> EnterpriseAdress { get; set; }
+        public virtual DbSet<EnterpriseAddress> EnterpriseAddress { get; set; }
 
         public ContactDBContext(DbContextOptions<ContactDBContext> options)
             : base(options)
@@ -37,9 +37,9 @@ namespace ContactManagement.DAL
             {
                 entity.HasKey(e => new { e.ContactId, e.EnterpriseId });
             });
-            modelBuilder.Entity<EnterpriseAdress>(entity =>
+            modelBuilder.Entity<EnterpriseAddress>(entity =>
             {
-                entity.HasKey(e => new { e.AdressId, e.EnterpriseId });
+                entity.HasKey(e => new { e.AddressId, e.EnterpriseId });
             });
         }
         

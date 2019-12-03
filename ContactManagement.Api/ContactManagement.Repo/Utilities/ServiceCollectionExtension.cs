@@ -44,7 +44,7 @@ namespace ContactManagement.Repo.Utilities
         {
             services.AddScoped<IContactRepository, ContactRepository>();
             services.AddScoped<IEnterpriseRepository, EnterpriseRepository>();
-            services.AddScoped<IAdressRepository, AdressRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
         }
         public static void AddServices(this IServiceCollection services)
         {

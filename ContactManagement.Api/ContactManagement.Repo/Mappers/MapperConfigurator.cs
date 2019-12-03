@@ -11,7 +11,7 @@ namespace ContactManagement.Repo.Mappers
             Mapper.Initialize(cfg =>
             {
                 cfg.AddProfile<ContactMapProfile>();
-                cfg.AddProfile<AdressMapProfile>();
+                cfg.AddProfile<AddressMapProfile>();
                 cfg.AddProfile<EnterpriseMapProfile>();
             });
 

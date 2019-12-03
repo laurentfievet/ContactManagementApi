@@ -6,11 +6,11 @@ using ContactManagement.Repo.Models;
 namespace ContactManagement.Repo.Mappers
 {
 
-    public class AdressMapProfile : Profile
+    public class AddressMapProfile : Profile
     {
-        public AdressMapProfile()
+        public AddressMapProfile()
         {
-            CreateMap<AdressDTO, Adress>().ReverseMap();
+            CreateMap<AddressDTO, Address>().ReverseMap();
       
         }
     }

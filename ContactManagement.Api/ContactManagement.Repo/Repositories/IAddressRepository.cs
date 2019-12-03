@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ContactManagement.Repo.Repositories
 {
-    public interface IAdressRepository : IRepository<Adress, long>
+    public interface IAddressRepository : IRepository<Address, long>
     {
-        Task<List<Adress>> GetAllAsync();
-        Task<AdressDTO> GetByIdAsync(long id);
+        Task<List<Address>> GetAllAsync();
+        Task<AddressDTO> GetByIdAsync(long id);
     }
 }

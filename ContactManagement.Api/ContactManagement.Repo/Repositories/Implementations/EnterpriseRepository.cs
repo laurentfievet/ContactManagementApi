@@ -47,7 +47,7 @@ namespace ContactManagement.Repo.Repositories
         {
             return await (from dbEnterprise in _dbContext.Enterprise
                           .Include(b => b.ContactEnterprise).ThenInclude(b => b.Contact)
-                           .Include(b => b.EnterpriseAdress).ThenInclude(b => b.Adress)
+                           .Include(b => b.EnterpriseAddress).ThenInclude(b => b.Address)
                           where dbEnterprise.Id == id
                           select dbEnterprise)
                           .SingleOrDefaultAsync();
@@ -57,7 +57,7 @@ namespace ContactManagement.Repo.Repositories
         {
             return await (from dbEnterprise in _dbContext.Enterprise
                           .Include(b => b.ContactEnterprise).ThenInclude(b => b.Contact)
-                           .Include(b => b.EnterpriseAdress).ThenInclude(b => b.Adress)
+                           .Include(b => b.EnterpriseAddress).ThenInclude(b => b.Address)
                           where dbEnterprise.Id == id
                           select dbEnterprise)
                           .Select(SelectEnterprise)
@@ -68,7 +68,7 @@ namespace ContactManagement.Repo.Repositories
         {
             return await (from dbEnterprise in _dbContext.Enterprise
                            .Include(b => b.ContactEnterprise).ThenInclude(b => b.Contact)
-                           .Include(b => b.EnterpriseAdress).ThenInclude(b => b.Adress)
+                           .Include(b => b.EnterpriseAddress).ThenInclude(b => b.Address)
                           select dbEnterprise)
                           .ToListAsync();
         }
@@ -99,17 +99,17 @@ namespace ContactManagement.Repo.Repositories
          new EnterpriseDTOFull()
          {
              Id = item.Id,
-             TVANumber = item.TVANumber,
+             VATNumber = item.VATNumber,
              Name = item.Name,
-             Adresses = item.EnterpriseAdress.Select(x => new EnterpriseAdressDTO()
+             Addresses = item.EnterpriseAddress.Select(x => new EnterpriseAddressDTO()
              {
-                 Id = x.Adress.Id,
-                 City = x.Adress.City,
-                 Country = x.Adress.Country,
-                 Name = x.Adress.Name,
-                 PostalCode = x.Adress.PostalCode,
-                 Street = x.Adress.Street,
-                 StreetNumber = x.Adress.StreetNumber,
+                 Id = x.Address.Id,
+                 City = x.Address.City,
+                 Country = x.Address.Country,
+                 Name = x.Address.Name,
+                 PostalCode = x.Address.PostalCode,
+                 Street = x.Address.Street,
+                 StreetNumber = x.Address.StreetNumber,
                  HeadOffice = x.HeadOffice
              }).ToList()
          });

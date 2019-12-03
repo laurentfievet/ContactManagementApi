@@ -52,7 +52,7 @@ namespace ContactManagement.Repo.Services.Implementations
                         {
                             Id = x.Id,
                             Name = x.Name,
-                            TVANumber = x.TVANumber
+                            VATNumber = x.VATNumber
                         }
                     }).ToList();
                 }
