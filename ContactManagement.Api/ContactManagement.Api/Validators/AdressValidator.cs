@@ -19,8 +19,8 @@ namespace ContactManagement.Api.Validators
             RuleFor(v => v.Street).NotEmpty().MaximumLength(250);
             RuleFor(v => v.StreetNumber).NotEmpty().MaximumLength(20);
 
-
-
         }
     }
+
+    
 }

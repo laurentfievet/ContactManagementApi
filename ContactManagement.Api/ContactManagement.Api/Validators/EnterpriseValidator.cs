@@ -23,6 +23,18 @@ namespace ContactManagement.Api.Validators
 
         }
 
+        public class EnterpriseAdressValidator : AbstractValidator<EnterpriseAdresListDTO>
+        {
+            public EnterpriseAdressValidator()
+            {
+
+                RuleForEach(v => v.enterpriseAdresses).SetValidator(new AdressValidator());
+                RuleFor(x => x.enterpriseAdresses).SetValidator(new UniqueInnerCollectionValidator());
+
+
+            }
+        }
+
         public class UniqueInnerCollectionValidator : PropertyValidator
         {
             public UniqueInnerCollectionValidator()

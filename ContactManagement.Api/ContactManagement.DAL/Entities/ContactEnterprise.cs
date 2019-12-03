@@ -10,7 +10,7 @@ namespace ContactManagement.DAL.Entities
         public long ContactId { get; set; }
         public long EnterpriseId { get; set; }
 
-        [JsonIgnore]
+
         public virtual Contact Contact { get; set; }
         [JsonIgnore]
         public virtual Enterprise Enterprise { get; set; }

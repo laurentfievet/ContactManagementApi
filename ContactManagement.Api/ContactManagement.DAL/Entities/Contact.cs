@@ -29,7 +29,7 @@ namespace ContactManagement.DAL.Entities
 
         public virtual Adress Adress { get; set; }
 
-
+        [JsonIgnore]
         public ICollection<ContactEnterprise> ContactEnterprise { get; set; } = new List<ContactEnterprise>();
 
     }

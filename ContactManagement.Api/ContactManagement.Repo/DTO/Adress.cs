@@ -20,4 +20,9 @@ namespace ContactManagement.Repo.Models
     {
         public bool HeadOffice { get; set; }
     }
+
+    public class EnterpriseAdresListDTO
+    {
+        public List<EnterpriseAdressDTO> enterpriseAdresses { get; set; }
+    }
 }

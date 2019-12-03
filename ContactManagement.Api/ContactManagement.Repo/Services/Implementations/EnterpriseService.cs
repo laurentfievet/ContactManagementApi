@@ -68,7 +68,45 @@ namespace ContactManagement.Repo.Services.Implementations
                 throw new ArgumentNullException(nameof(enterpriseDTO));
         }
 
-       public async Task DeleteAsync(long id)
+        public async Task<Enterprise> AddAdressesAsync(long enterpriseId, List<EnterpriseAdressDTO> enterpriseDTOList)
+        {
+           
+                Enterprise enterprise = await _enterpriseRepository.GetByIdAsync(enterpriseId);
+                if (enterprise == null)
+                    throw new ArgumentNullException(nameof(enterprise));
+
+                    bool newHeadOffice = enterpriseDTOList.Where(x => x.HeadOffice == true).Count() > 0;
+
+                    if (newHeadOffice)
+                    {
+                        enterprise.EnterpriseAdress.Where(x => x.HeadOffice == true).FirstOrDefault().HeadOffice = false; 
+                    }
+                    
+                    foreach (EnterpriseAdressDTO dto in enterpriseDTOList)
+                    {
+                        enterprise.EnterpriseAdress.Add(new EnterpriseAdress
+                        {
+                            Adress = new Adress { 
+                                Id = dto.Id,
+                                City = dto.City,
+                                Country = dto.Country,
+                                Name = dto.Name,
+                                PostalCode = dto.PostalCode,
+                                Street = dto.Street,
+                                StreetNumber = dto.StreetNumber
+                            },
+                            EnterpriseId = enterpriseId,
+                            HeadOffice = dto.HeadOffice
+                        });
+                    }
+
+                await _enterpriseRepository.UpsertAsync(enterprise);
+
+                return enterprise;
+           
+        }
+
+        public async Task DeleteAsync(long id)
         {
             var item = await _enterpriseRepository.GetByIdAsync(id);
 

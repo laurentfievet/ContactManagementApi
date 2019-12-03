@@ -28,6 +28,7 @@ namespace ContactManagement.DAL.Entities
         [StringLength(50)]
         public string Country { get; set; }
 
+        [JsonIgnore]
         public ICollection<EnterpriseAdress> EnterpriseAdress { get; set; } = new List<EnterpriseAdress>();
 
     }

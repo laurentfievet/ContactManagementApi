@@ -47,6 +47,14 @@ namespace ContactManagement.Api.Controllers
 
         }
 
+        [ HttpPut("{enterpriseId}/addAdresses")]
+        public async Task<IActionResult> addAdresses(long enterpriseId, [FromBody] EnterpriseAdresListDTO enterpriseAdressList)
+        {
+            var item = await _enterpriseService.AddAdressesAsync(enterpriseId, enterpriseAdressList.enterpriseAdresses);
+            return CreatedAtAction(nameof(Get), new { id = item.Id }, item);
+
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] long id)
         {
