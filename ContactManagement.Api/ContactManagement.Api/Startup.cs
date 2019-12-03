@@ -42,6 +42,8 @@ namespace ContactManagement.Api
             services.AddSwaggerService(Assembly.GetExecutingAssembly().FullName.Split(',')[0]);
             services.AddRepositories();
             services.AddServices();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,13 +64,22 @@ namespace ContactManagement.Api
             {
                 endpoints.MapControllers();
             });
-
+            
            
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Contact Management Api V1");
             });
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = scope.ServiceProvider.GetService<ContactDBContext>())
+                {
+                    context.Database.EnsureDeleted();
+                    context.Database.EnsureCreated();
+                    //context.Database.Migrate();
+                }
+            }
         }
     }
 }

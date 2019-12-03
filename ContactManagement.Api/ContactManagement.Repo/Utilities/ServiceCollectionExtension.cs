@@ -20,7 +20,9 @@ namespace ContactManagement.Repo.Utilities
             services.AddDbContext<ContactDBContext>(options =>
             {
                 options.UseSqlServer(config.GetConnectionString("ContactManagementDB"));
+               
             });
+
 
         }
 
